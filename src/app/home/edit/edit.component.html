@@ -1,0 +1,160 @@
+	<h1 *ngIf="prospect.prospectId">
+		{{txtName.value}}
+	</h1>		
+	<div>
+			<div class="form-group">
+				<mat-form-field>
+					<mat-label for="prospectname">
+						Prospect Name
+					</mat-label>
+					<input matInput
+						id="prospectname"
+						class="form-control"
+						required 
+						minlength="2"
+						maxlength="20"
+						placeholder="Ex. John Smith" 
+						[formControl]="txtName"					
+					>					
+				</mat-form-field>
+				<div *ngIf="txtName.invalid && (txtName.dirty||txtName.touched)" 
+				class="alert-danger">
+						<div *ngIf="txtName.errors.required">					
+							Prospect Name is a required field.
+						</div>
+						<div *ngIf="txtName.errors.minlength">
+							Prospect Name is too short.
+						</div>
+						<div *ngIf="txtName.errors.maxlength">
+							Prospect Name is too long.
+						</div>
+				</div>			
+			</div>
+			<div class="form-group">
+				<mat-form-field>
+					<mat-label for="orgname">
+						Prospect Company Name
+					</mat-label>					
+					<input matInput 
+						id="orgname"
+						class="form-control"
+						maxlength="30"
+						required						
+						placeholder="Ex. Sula company"
+						[formControl]="txtOrganization"
+					>								
+				</mat-form-field>															
+				<div *ngIf="txtOrganization.invalid && (txtOrganization.dirty || txtOrganization.touched)" 
+				        class="alert-danger">
+					
+						<div *ngIf="txtOrganization.errors.required">
+							Prospect Company Name is a required field.
+						</div>
+						<div *ngIf="txtOrganization.errors.maxlength">
+							Prospect Company Name must be shorter than 30 characters.
+						</div>
+				</div>
+			</div>
+			<!--TODO: PHONE PATTERN VALIDATION -->
+			<div>
+				<mat-form-field>
+					<mat-label for="phone">
+						Prospect Phone
+					</mat-label>
+					<input matInput 
+						id="phone"
+						class="form-control"
+						required
+						placeholder="Ex. +504 0000-0000" 
+						[formControl]="txtPhone"
+					>
+				</mat-form-field>			
+				<div [hidden]="txtPhone.valid||txtPhone.pristine" 
+				class="alert-danger">
+					Prospect Phone is a required field.
+				</div>
+			</div>
+			<div>	
+				<mat-form-field>
+					<mat-label for="country">
+						Prospect Country
+					</mat-label>
+					<input matInput 
+						id="country"
+						class="form-control"
+						required
+						minlength="1"
+						maxlength="3"
+						placeholder="Ex. USA" 
+						[formControl]="txtCountry"	
+					>			
+				</mat-form-field>
+				<div *ngIf="txtCountry.invalid&&(txtCountry.dirty||txtCountry.touched)" 
+				class="alert-danger">
+					<div *ngIf="txtCountry.errors.required">
+						Prospect Country is a required field.
+					</div>
+					<div *ngIf="txtCountry.errors.minlength">
+						Please stick to three-digit coutry code.
+					</div>
+					<div *ngIf="txtCountry.errors.maxlength">
+						Please stick to three-digit country code.
+					</div>					
+				</div>
+			</div>
+			<!-- TODO: MAIL PATTERN VALIDATION-->
+			<div>				
+				<mat-form-field>
+					<mat-label for="email">
+						Prospect Email
+					</mat-label>
+					<input matInput 
+						id="email"
+						class="form-control ng-untouched ng-pristine ng-valid"
+						required
+						placeholder="Ex. example@gmail.com" 
+						[formControl]="txtEmail"
+					>
+				</mat-form-field>			
+				<div [hidden]="txtEmail.valid||txtEmail.pristine" 
+				class="alert-danger">
+					Prospect Email is a required field.
+				</div>
+			</div>
+			<div>
+				<mat-form-field>
+					<mat-label for="status">
+						Prospect Status 
+					</mat-label>
+					<input matInput
+						id="status"
+						class="form-control ng-untouched ng-pristine ng-valid"
+						required
+						placeholder="Ex.1"
+						[formControl]="txtStatus"
+					>			
+				</mat-form-field>
+				<div [hidden]="txtStatus.valid||txtStatus.pristine" 
+				class="alert-danger">
+					Prospect Status should not be empty.
+				</div>
+			</div>
+			<div>
+				<mat-form-field>
+					<mat-label>
+						Prospect Comments
+					</mat-label>
+					<textarea matInput 
+						placeholder="Enter comments"
+						class="form-control ng-untouched ng-pristine ng-valid" 
+						[formControl]="txtComments">					
+					</textarea>
+				</mat-form-field>
+			</div>				
+			<button mat-button (click)="save(); updateClick()" 
+				[disabled]="txtName.invalid || txtEmail.invalid || txtOrganization.invalid || txtCountry.invalid
+				||txtPhone.invalid||txtCountry.invalid ||txtStatus.invalid || clicked.valueOf()===true "
+			>
+				Save Prospect
+			</button>			
+	</div>

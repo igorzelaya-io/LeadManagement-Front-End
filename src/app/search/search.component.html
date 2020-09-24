@@ -1,0 +1,32 @@
+<form>
+	<mat-form-field style="height: 100%;">
+		<mat-chip-list #chipList>
+			<mat-chip style="margin-top:0.4em;" *ngFor="let prospect of this.apiArray" (removed)="removeOption(prospect)">
+				<span>
+					{{prospect.prospectEmail}}
+				</span>
+				<mat-icon matChipRemove>
+					Cancel
+				</mat-icon>
+			</mat-chip>
+			<input #autocompleteInput type="text"
+				placeholder="Enter prospect Email"
+				aria-label="Number"
+				matInput
+				[formControl]="myControl"
+				[matAutocomplete]="auto"
+				[matChipInputFor]="chipList"
+			>
+			<mat-autocomplete #auto="matAutocomplete"
+				[displayWith]="displayFn">
+				<mat-option *ngFor="let prospect of autoCompleteList"
+					[value]="prospect"
+					(onSelectionChange)="filterPostList($event)"
+				>
+				{{prospect.prospectName}}	
+				</mat-option>
+			</mat-autocomplete>		
+		</mat-chip-list>
+	
+	</mat-form-field>
+</form>

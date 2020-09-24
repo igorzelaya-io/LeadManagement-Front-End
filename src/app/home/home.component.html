@@ -1,0 +1,100 @@
+
+<div style="padding: 13px;">
+  <mat-spinner *ngIf="!prospects">
+  </mat-spinner>
+	<div style="margin-bottom:10px; width: 70%; margin-top: 30px;">
+		 
+		<app-search (onSelectedOption)="onSelectedFilter($event)">
+			
+		</app-search>
+	</div>
+		<h1>
+			Prospects
+		</h1>	
+	<div class="grid-container">	
+		<mat-grid-list cols="3" rowHeight="12rem">  
+		   	<mat-grid-tile *ngFor="let prospect of prospects" [rowspan]="2">
+				<mat-card class="dashboard-card">   
+					<mat-card-header>
+						<mat-card-title>
+					        {{prospect.prospectName}}
+					    </mat-card-title>
+					      
+						<mat-card-subtitle>
+					   		<div>
+								{{prospect.prospectId}}  
+					    	</div>
+							<div>
+								{{prospect.prospectOrgName}}
+							</div>
+							<div>
+								{{prospect.prospectPhone}}/{{prospect.prospectCountry}}
+							</div>
+							<div>
+								{{prospect.prospectEmail}}
+							</div>			
+						  </mat-card-subtitle>
+					</mat-card-header>
+					<mat-card-content>
+						<div>
+						  {{prospect.prospectStatusCode}}
+					    </div>
+						<p>
+					      {{prospect.prospectComments}}
+					     </p>
+					   	 <button mat-raised-button color="Primary"
+					        [routerLink]="['/home/prospects/edit']"
+					        [queryParams]="{ prospectId: prospect.prospectId,
+					          prospectName: prospect.prospectName,
+					          prospectOrgName: prospect.prospectOrgName,
+					          prospectPhone: prospect.prospectPhone,
+					          prospectCountry: prospect.prospectCountry,
+					          prospectEmail: prospect.prospectEmail,
+					          prospectStatusCode: prospect.prospectStatusCode,
+					          prospectComments: prospect.prospectComments }" 
+							>
+					       Edit Prospect
+					      </button>
+					      	<button mat-fab color="primary" (click)="deleteProspects(prospect.prospectId)">
+								<mat-icon>
+									delete prospect
+								</mat-icon>
+					      	</button>
+					  </mat-card-content>
+					</mat-card>
+				 </mat-grid-tile>
+			</mat-grid-list>
+	</div>
+	<div>
+		<button mat-raised-button color="primary"
+			[routerLink]="['/home/prospects/edit']">
+			Create Prospect
+		</button>
+	</div>
+</div> 
+
+<!--		<div class="grid-container">
+		<mat-grid-list *ngFor="let prospect of prospects" cols="3" rowHeight="100px">
+		  <mat-grid-tile>
+		    <mat-card class="dashboard-card">
+		      Hello
+			<div>
+					hello
+				</div>
+<div>
+					hello
+				</div>
+<div>
+					hello
+				</div>
+<button>hello</button>
+		    </mat-card>		      
+		  </mat-grid-tile>
+			<mat-grid-tile>
+			<mat-card class="dashboard-card">
+		      Ola
+		    </mat-card>
+			</mat-grid-tile>  
+		</mat-grid-list>
+	</div>
+-->
